@@ -1,0 +1,34 @@
+<view class="page study-page">
+  <view class="progress-row">
+    <text class="muted small">{{currentIndex + 1}} / {{words.length}}</text>
+    <text class="pill">{{current.book}}</text>
+  </view>
+
+  <view wx:if="{{current}}" class="card word-card">
+    <text class="word">{{current.text}}</text>
+    <text class="phonetic">{{current.phonetic}}</text>
+    <text class="part">{{current.partOfSpeech}}</text>
+
+    <view class="divider"></view>
+
+    <view class="meaning">{{showAnswer ? current.meaning : "先想一想它在阅读里常见的意思"}}</view>
+    <view wx:if="{{showAnswer}}" class="example">{{current.example}}</view>
+    <view wx:if="{{showAnswer}}" class="note">{{current.collocation}} · {{current.note}}</view>
+  </view>
+
+  <view wx:if="{{current}}" class="section actions">
+    <button wx:if="{{!showAnswer}}" class="button" bindtap="reveal">看答案</button>
+    <block wx:else>
+      <button class="grade again" bindtap="grade" data-grade="again">不会</button>
+      <button class="grade hard" bindtap="grade" data-grade="hard">模糊</button>
+      <button class="grade good" bindtap="grade" data-grade="good">认识</button>
+      <button class="grade easy" bindtap="grade" data-grade="easy">熟练</button>
+    </block>
+  </view>
+
+  <view wx:else class="card done">
+    <view class="title">今天这组完成了</view>
+    <view class="subtitle">答错的词已经进入错词本，之后会优先复习。</view>
+    <button class="button" bindtap="backHome">回到今日</button>
+  </view>
+</view>

@@ -1,0 +1,104 @@
+.study-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64rpx;
+}
+
+.word-card {
+  min-height: 620rpx;
+  margin-top: 22rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.word {
+  font-size: 72rpx;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.phonetic {
+  margin-top: 14rpx;
+  color: #176b5b;
+  font-size: 30rpx;
+}
+
+.part {
+  margin-top: 18rpx;
+  color: #69717c;
+  font-size: 26rpx;
+}
+
+.divider {
+  height: 1rpx;
+  margin: 42rpx 0;
+  background: #e7e1d6;
+}
+
+.meaning {
+  font-size: 38rpx;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.example {
+  margin-top: 28rpx;
+  color: #2f3740;
+  font-size: 30rpx;
+  line-height: 1.55;
+}
+
+.note {
+  margin-top: 24rpx;
+  color: #69717c;
+  font-size: 26rpx;
+  line-height: 1.55;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16rpx;
+}
+
+.actions .button {
+  grid-column: 1 / -1;
+}
+
+.grade {
+  min-height: 88rpx;
+  border-radius: 10rpx;
+  color: #ffffff;
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.again {
+  background: #b6423c;
+}
+
+.hard {
+  background: #b7791f;
+}
+
+.good {
+  background: #176b5b;
+}
+
+.easy {
+  background: #315f9f;
+}
+
+.done {
+  margin-top: 180rpx;
+}
+
+.done .button {
+  margin-top: 30rpx;
+}

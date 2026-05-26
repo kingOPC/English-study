@@ -1,0 +1,7 @@
+.DS_Store
+.claude/
+project.private.config.json
+node_modules/
+miniprogram_npm/
+*.log
+utils/words.generated.js

@@ -1,0 +1,27 @@
+<view class="page article">
+  <view class="title">隐私政策</view>
+  <view class="subtitle">更新日期：2026-05-26</view>
+
+  <view class="card section">
+    <view class="heading">信息收集</view>
+    <view class="paragraph">本小程序用于英语词汇学习和复习。当前版本仅在用户设备本地保存学习进度、错词记录、复习记录和词库设置。</view>
+    <view class="paragraph">当前版本不会主动收集真实姓名、手机号、身份证号、精确位置等敏感个人信息。</view>
+  </view>
+
+  <view class="card section">
+    <view class="heading">信息使用</view>
+    <view class="paragraph">学习数据仅用于生成每日任务、安排间隔复习、展示错词本和学习统计。</view>
+    <view class="paragraph">本小程序不会出售、出租或向第三方共享用户学习数据。</view>
+  </view>
+
+  <view class="card section">
+    <view class="heading">本地存储</view>
+    <view class="paragraph">游客模式下，学习进度保存在微信小程序本地存储中。用户可以在“我的”页面清空学习记录。</view>
+    <view class="paragraph">用户主动登录并同步后，学习进度、错题记录和测试记录会保存到微信云开发数据库，用于跨设备保留学习进度。</view>
+  </view>
+
+  <view class="card section">
+    <view class="heading">后续更新</view>
+    <view class="paragraph">如果后续接入云同步、账号系统或其他需要联网的能力，将在上线前更新本隐私政策并向用户说明。</view>
+  </view>
+</view>

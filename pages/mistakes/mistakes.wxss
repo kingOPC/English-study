@@ -1,0 +1,35 @@
+.mistake {
+  margin-top: 16rpx;
+}
+
+.revenge-panel {
+  display: grid;
+  gap: 22rpx;
+}
+
+.word {
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.meaning {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  font-weight: 650;
+}
+
+.note {
+  margin-top: 12rpx;
+  color: #69717c;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.empty {
+  margin-top: 80rpx;
+}
+
+.panel-title {
+  font-size: 31rpx;
+  font-weight: 800;
+}

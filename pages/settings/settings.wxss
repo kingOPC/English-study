@@ -1,0 +1,35 @@
+.summary {
+  margin-top: 28rpx;
+}
+
+.sync-button {
+  margin-top: 26rpx;
+}
+
+.panel-title {
+  font-size: 31rpx;
+  font-weight: 750;
+}
+
+.list {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-item {
+  min-height: 104rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28rpx;
+  border-bottom: 1rpx solid #eee8dc;
+  font-size: 29rpx;
+}
+
+.list-item:last-child {
+  border-bottom: 0;
+}
+
+.danger {
+  color: #b6423c;
+}

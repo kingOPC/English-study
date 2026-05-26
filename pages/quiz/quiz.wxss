@@ -1,0 +1,266 @@
+.quiz-page {
+  padding-bottom: 44rpx;
+}
+
+.quiz-shell {
+  min-height: 100vh;
+}
+
+.quiz-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.quiz-mode {
+  color: #20242a;
+  font-size: 34rpx;
+  font-weight: 850;
+}
+
+.quiz-count {
+  margin-top: 8rpx;
+  color: #69717c;
+  font-size: 24rpx;
+}
+
+.score-pill {
+  min-width: 104rpx;
+  height: 58rpx;
+  border-radius: 999rpx;
+  background: #20242a;
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 750;
+  line-height: 58rpx;
+  text-align: center;
+}
+
+.progress-track {
+  height: 14rpx;
+  overflow: hidden;
+  margin-top: 24rpx;
+  border-radius: 999rpx;
+  background: #e8e1d4;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 999rpx;
+  background: #176b5b;
+}
+
+.question-card {
+  min-height: 360rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 26rpx;
+  padding: 34rpx;
+  border-radius: 20rpx;
+  background: #ffffff;
+  box-shadow: 0 18rpx 46rpx rgba(32, 36, 42, 0.07);
+}
+
+.question-label {
+  color: #69717c;
+  font-size: 25rpx;
+  font-weight: 650;
+}
+
+.word {
+  margin-top: 28rpx;
+  color: #20242a;
+  font-size: 78rpx;
+  font-weight: 900;
+  line-height: 1.05;
+  word-break: break-word;
+}
+
+.phonetic {
+  margin-top: 18rpx;
+  color: #176b5b;
+  font-size: 30rpx;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 24rpx;
+}
+
+.tag-row text {
+  min-height: 42rpx;
+  padding: 0 16rpx;
+  border-radius: 999rpx;
+  background: #f1eee6;
+  color: #4d555f;
+  font-size: 22rpx;
+  line-height: 42rpx;
+}
+
+.options {
+  display: grid;
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.option {
+  position: relative;
+  min-height: 116rpx;
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  overflow: hidden;
+  padding: 20rpx 24rpx;
+  border: 1rpx solid rgba(32, 36, 42, 0.08);
+  border-radius: 18rpx;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
+  color: #20242a;
+  text-align: left;
+  box-shadow: 0 14rpx 34rpx rgba(32, 36, 42, 0.06);
+}
+
+.option::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18rpx;
+  bottom: 18rpx;
+  width: 6rpx;
+  border-radius: 0 999rpx 999rpx 0;
+  background: #d8d1c3;
+}
+
+.option-key {
+  width: 56rpx;
+  height: 56rpx;
+  flex: 0 0 56rpx;
+  border: 1rpx solid #e3ddd0;
+  border-radius: 16rpx;
+  background: #f5f1e9;
+  color: #4d555f;
+  font-size: 24rpx;
+  font-weight: 850;
+  line-height: 56rpx;
+  text-align: center;
+}
+
+.option-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.option-text {
+  font-size: 30rpx;
+  font-weight: 780;
+  line-height: 1.35;
+}
+
+.option-hint {
+  margin-top: 8rpx;
+  color: #8a8277;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.option-state {
+  width: 48rpx;
+  height: 48rpx;
+  flex: 0 0 48rpx;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 900;
+  line-height: 48rpx;
+  text-align: center;
+}
+
+.option.correct {
+  border-color: rgba(23, 107, 91, 0.35);
+  background: linear-gradient(180deg, #f1fbf7 0%, #e4f3ee 100%);
+  box-shadow: 0 16rpx 38rpx rgba(23, 107, 91, 0.14);
+}
+
+.option.correct::before {
+  background: #176b5b;
+}
+
+.option.correct .option-key {
+  background: #176b5b;
+  border-color: #176b5b;
+  color: #ffffff;
+}
+
+.option.correct .option-state {
+  background: #176b5b;
+}
+
+.option.correct .option-hint {
+  color: #176b5b;
+}
+
+.option.wrong {
+  border-color: rgba(182, 66, 60, 0.34);
+  background: linear-gradient(180deg, #fff5f4 0%, #fae4e2 100%);
+  box-shadow: 0 16rpx 38rpx rgba(182, 66, 60, 0.12);
+}
+
+.option.wrong::before {
+  background: #b6423c;
+}
+
+.option.wrong .option-key {
+  background: #b6423c;
+  border-color: #b6423c;
+  color: #ffffff;
+}
+
+.option.wrong .option-state {
+  background: #b6423c;
+}
+
+.option.wrong .option-hint {
+  color: #b6423c;
+}
+
+.feedback {
+  margin-top: 24rpx;
+  padding: 26rpx;
+  border-radius: 18rpx;
+}
+
+.feedback.ok {
+  background: #e8f4ef;
+}
+
+.feedback.no {
+  background: #fae9e8;
+}
+
+.feedback-title {
+  font-size: 31rpx;
+  font-weight: 850;
+}
+
+.feedback-copy,
+.feedback-note {
+  margin-top: 12rpx;
+  color: #3b424b;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.feedback .button {
+  margin-top: 22rpx;
+}
+
+.done {
+  margin-top: 120rpx;
+}
+
+.done .button {
+  margin-top: 28rpx;
+}

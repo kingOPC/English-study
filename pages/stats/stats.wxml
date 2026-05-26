@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="title">学习统计</view>
+  <view class="subtitle">先关注掌握词数、错词数量和正确率，不做排名。</view>
+
+  <view class="section stat-grid">
+    <view class="card stat">
+      <text class="number">{{stats.activeTotal}}</text>
+      <text class="label">当前词库</text>
+    </view>
+    <view class="card stat">
+      <text class="number">{{stats.learned}}</text>
+      <text class="label">已学习</text>
+    </view>
+    <view class="card stat">
+      <text class="number">{{stats.mastered}}</text>
+      <text class="label">已掌握</text>
+    </view>
+    <view class="card stat">
+      <text class="number">{{stats.accuracy}}%</text>
+      <text class="label">正确率</text>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="panel-title">复习建议</view>
+    <view class="advice">{{advice}}</view>
+  </view>
+</view>

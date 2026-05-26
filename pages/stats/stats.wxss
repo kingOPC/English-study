@@ -1,0 +1,36 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16rpx;
+}
+
+.stat {
+  min-height: 170rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.number {
+  color: #176b5b;
+  font-size: 48rpx;
+  font-weight: 800;
+}
+
+.label {
+  margin-top: 8rpx;
+  color: #69717c;
+  font-size: 25rpx;
+}
+
+.panel-title {
+  font-size: 31rpx;
+  font-weight: 700;
+}
+
+.advice {
+  margin-top: 18rpx;
+  color: #3b424b;
+  font-size: 28rpx;
+  line-height: 1.55;
+}

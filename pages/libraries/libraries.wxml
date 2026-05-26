@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="title">词库选择</view>
+  <view class="subtitle">三个难度可以自由开关：小学打基础，高中提分，四六级拓展。</view>
+
+  <view class="section">
+    <view wx:for="{{books}}" wx:key="id" class="card book">
+      <view class="row">
+        <view class="book-copy">
+          <view class="book-name">{{item.name}}</view>
+          <view class="subtitle">{{item.description}}</view>
+          <view class="book-stats">{{item.summary.total}} 词 · 已学 {{item.summary.learned}} · 错题 {{item.summary.mistakes}}</view>
+        </view>
+        <switch checked="{{item.active}}" data-id="{{item.id}}" bindchange="toggleBook" color="#176b5b" />
+      </view>
+    </view>
+  </view>
+
+  <view class="section card settings">
+    <view class="panel-title">每日节奏</view>
+    <view class="setting-row">
+      <text>每日新词</text>
+      <input type="number" value="{{settings.dailyNewCount}}" data-field="dailyNewCount" bindinput="changeNumber" />
+    </view>
+    <view class="setting-row">
+      <text>每日复习</text>
+      <input type="number" value="{{settings.dailyReviewCount}}" data-field="dailyReviewCount" bindinput="changeNumber" />
+    </view>
+  </view>
+</view>

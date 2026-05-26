@@ -1,0 +1,54 @@
+<view class="page home-page">
+  <view class="hero-card">
+    <view class="eyebrow">每日词汇挑战</view>
+    <view class="hero-title">用小测把单词记牢</view>
+    <view class="hero-copy">选择难度，完成 10 道四选一。答错自动进入错题本，后面反复复测。</view>
+    <view class="hero-stats">
+      <view>
+        <text class="hero-number">{{stats.mastered}}</text>
+        <text class="hero-label">已掌握</text>
+      </view>
+      <view>
+        <text class="hero-number">{{stats.accuracy}}%</text>
+        <text class="hero-label">正确率</text>
+      </view>
+      <view>
+        <text class="hero-number">{{mistakeCount}}</text>
+        <text class="hero-label">待复测</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-head">
+      <view>
+        <view class="section-title">选择难度</view>
+        <view class="section-subtitle">从轻到难，按孩子当前状态选。</view>
+      </view>
+    </view>
+
+    <view wx:for="{{levels}}" wx:key="id" class="level-card {{item.tone}}" data-level="{{item.id}}" bindtap="startLevelQuiz">
+      <view class="level-icon">{{item.badge}}</view>
+      <view class="level-body">
+        <view class="level-name">{{item.name}}</view>
+        <view class="level-desc">{{item.description}}</view>
+        <view class="level-meta">
+          <text>{{item.summary.total}} 词</text>
+          <text>已学 {{item.summary.learned}}</text>
+          <text>错题 {{item.summary.mistakes}}</text>
+        </view>
+      </view>
+      <view class="level-action">开始</view>
+    </view>
+  </view>
+
+  <view class="section card revenge-card">
+    <view>
+      <view class="panel-title">错题复仇</view>
+      <view class="subtitle">优先攻克反复答错的词，答对后逐步降低出现频率。</view>
+    </view>
+    <button class="button revenge-button" bindtap="startMistakeQuiz" disabled="{{mistakeCount === 0}}">
+      {{mistakeCount === 0 ? "暂无错题" : "复测错题"}}
+    </button>
+  </view>
+</view>

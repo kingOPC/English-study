@@ -1,0 +1,55 @@
+<view class="page quiz-page">
+  <view wx:if="{{current}}" class="quiz-shell">
+    <view class="quiz-top">
+      <view>
+        <view class="quiz-mode">{{modeTitle}}</view>
+        <view class="quiz-count">{{currentIndex + 1}} / {{questions.length}}</view>
+      </view>
+      <view class="score-pill">{{score}} 对</view>
+    </view>
+
+    <view class="progress-track">
+      <view class="progress-bar" style="width: {{progressPercent}}%;"></view>
+    </view>
+
+    <view class="question-card">
+      <view class="question-label">这个单词是什么意思？</view>
+      <view class="word">{{current.word.text}}</view>
+      <view class="phonetic">{{current.word.phonetic}}</view>
+      <view class="tag-row">
+        <text>{{current.word.book}}</text>
+        <text>{{current.word.partOfSpeech}}</text>
+      </view>
+    </view>
+
+    <view class="options">
+      <view
+        wx:for="{{current.options}}"
+        wx:key="id"
+        class="option {{answered && item.id === current.word.id ? 'correct' : ''}} {{answered && item.id === selectedId && item.id !== current.word.id ? 'wrong' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="choose"
+      >
+        <view class="option-key">{{item.key}}</view>
+        <view class="option-main">
+          <view class="option-text">{{item.meaning}}</view>
+          <view class="option-hint">{{answered && item.id === current.word.id ? "正确答案" : answered && item.id === selectedId ? "你的选择" : "点击选择"}}</view>
+        </view>
+        <view class="option-state">{{answered && item.id === current.word.id ? "✓" : answered && item.id === selectedId ? "×" : ""}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{answered}}" class="feedback {{isCorrect ? 'ok' : 'no'}}">
+      <view class="feedback-title">{{isCorrect ? "答对了，继续保持" : "答错了，已进入错题本"}}</view>
+      <view class="feedback-copy">正确答案：{{current.word.meaning}}</view>
+      <view class="feedback-note">{{current.word.note}}</view>
+      <button class="button" bindtap="nextQuestion">{{isLast ? "查看结果" : "下一题"}}</button>
+    </view>
+  </view>
+
+  <view wx:else class="card done">
+    <view class="title">挑战完成</view>
+    <view class="subtitle">本轮正确 {{score}} / {{total}}。答错的词会在错题本里等你复测。</view>
+    <button class="button" bindtap="backHome">回到首页</button>
+  </view>
+</view>

@@ -1,0 +1,24 @@
+<view class="page article">
+  <view class="title">用户协议</view>
+  <view class="subtitle">更新日期：2026-05-26</view>
+
+  <view class="card section">
+    <view class="heading">服务说明</view>
+    <view class="paragraph">本小程序是个人免费英语词汇复习工具，提供词库挑战、四选一测试、错题本、错题复测和学习统计等功能。</view>
+  </view>
+
+  <view class="card section">
+    <view class="heading">使用规则</view>
+    <view class="paragraph">用户应将本小程序用于个人学习目的，不得利用本小程序从事违法违规活动，或干扰小程序的正常运行。</view>
+  </view>
+
+  <view class="card section">
+    <view class="heading">学习结果</view>
+    <view class="paragraph">本小程序提供辅助复习工具，不承诺任何考试成绩或学习结果。学习效果与用户使用频率、复习方法和个人基础有关。</view>
+  </view>
+
+  <view class="card section">
+    <view class="heading">服务调整</view>
+    <view class="paragraph">开发者可能根据功能完善、审核要求或用户反馈调整本小程序内容。重大调整会在合适位置提示用户。</view>
+  </view>
+</view>

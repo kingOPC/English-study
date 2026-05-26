@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/study/study",
+    "pages/quiz/quiz",
+    "pages/libraries/libraries",
+    "pages/mistakes/mistakes",
+    "pages/stats/stats",
+    "pages/settings/settings",
+    "pages/privacy/privacy",
+    "pages/agreement/agreement"
+  ],
+  "window": {
+    "navigationBarTitleText": "英语词汇复习助手",
+    "navigationBarBackgroundColor": "#f7f5ef",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f5ef"
+  },
+  "tabBar": {
+    "color": "#5f6570",
+    "selectedColor": "#176b5b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "今日"
+      },
+      {
+        "pagePath": "pages/libraries/libraries",
+        "text": "词库"
+      },
+      {
+        "pagePath": "pages/mistakes/mistakes",
+        "text": "错词"
+      },
+      {
+        "pagePath": "pages/stats/stats",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

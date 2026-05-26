@@ -1,0 +1,52 @@
+.book {
+  margin-top: 16rpx;
+}
+
+.book-copy {
+  flex: 1;
+}
+
+.book-name {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.book-stats {
+  margin-top: 12rpx;
+  color: #176b5b;
+  font-size: 24rpx;
+  font-weight: 650;
+}
+
+.settings {
+  display: grid;
+  gap: 20rpx;
+}
+
+.panel-title {
+  font-size: 31rpx;
+  font-weight: 800;
+}
+
+.setting-row {
+  min-height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+
+.setting-row text {
+  font-size: 29rpx;
+  font-weight: 600;
+}
+
+input {
+  width: 150rpx;
+  min-height: 72rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #d9d4c8;
+  border-radius: 10rpx;
+  background: #fbfaf7;
+  text-align: center;
+}

@@ -1,0 +1,174 @@
+.home-page {
+  padding-bottom: 44rpx;
+}
+
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  padding: 36rpx 32rpx;
+  border-radius: 18rpx;
+  background: linear-gradient(135deg, #123c36 0%, #176b5b 52%, #e26d5a 140%);
+  color: #ffffff;
+}
+
+.eyebrow {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.hero-title {
+  margin-top: 16rpx;
+  max-width: 560rpx;
+  font-size: 54rpx;
+  font-weight: 850;
+  line-height: 1.12;
+}
+
+.hero-copy {
+  margin-top: 18rpx;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 27rpx;
+  line-height: 1.55;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14rpx;
+  margin-top: 34rpx;
+}
+
+.hero-stats view {
+  min-height: 116rpx;
+  padding: 18rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.18);
+  border-radius: 12rpx;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-number,
+.hero-label {
+  display: block;
+}
+
+.hero-number {
+  font-size: 38rpx;
+  font-weight: 850;
+}
+
+.hero-label {
+  margin-top: 8rpx;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 22rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title,
+.panel-title {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.section-subtitle {
+  margin-top: 8rpx;
+  color: #69717c;
+  font-size: 25rpx;
+}
+
+.level-card {
+  min-height: 164rpx;
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  margin-top: 18rpx;
+  padding: 26rpx;
+  border: 1rpx solid #e5dfd2;
+  border-radius: 16rpx;
+  background: #ffffff;
+  box-shadow: 0 12rpx 30rpx rgba(32, 36, 42, 0.05);
+}
+
+.level-icon {
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14rpx;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 850;
+}
+
+.level-card.elementary .level-icon {
+  background: #2f8f6f;
+}
+
+.level-card.high .level-icon {
+  background: #315f9f;
+}
+
+.level-card.cet .level-icon {
+  background: #6d4aa2;
+}
+
+.level-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.level-name {
+  font-size: 33rpx;
+  font-weight: 820;
+}
+
+.level-desc {
+  margin-top: 8rpx;
+  color: #69717c;
+  font-size: 24rpx;
+  line-height: 1.45;
+}
+
+.level-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 14rpx;
+}
+
+.level-meta text {
+  min-height: 38rpx;
+  padding: 0 14rpx;
+  border-radius: 999rpx;
+  background: #f1eee6;
+  color: #4d555f;
+  font-size: 22rpx;
+  line-height: 38rpx;
+}
+
+.level-action {
+  min-width: 84rpx;
+  height: 58rpx;
+  border-radius: 999rpx;
+  background: #20242a;
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 700;
+  line-height: 58rpx;
+  text-align: center;
+}
+
+.revenge-card {
+  display: grid;
+  gap: 22rpx;
+}
+
+.revenge-button {
+  margin: 0;
+}

@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="title">错题本</view>
+  <view class="subtitle">答错的词会自动进入这里。复测答对后，后续出现频率会降低。</view>
+
+  <view wx:if="{{words.length}}" class="section card revenge-panel">
+    <view>
+      <view class="panel-title">错题复测</view>
+      <view class="subtitle">本轮优先抽取最容易错的 10 个词。</view>
+    </view>
+    <button class="button" bindtap="startMistakeQuiz">开始复测</button>
+  </view>
+
+  <view wx:if="{{words.length}}" class="section">
+    <view wx:for="{{words}}" wx:key="id" class="card mistake">
+      <view class="row">
+        <view>
+          <view class="word">{{item.text}}</view>
+          <view class="small muted">{{item.phonetic}} · {{item.book}}</view>
+        </view>
+        <text class="pill">错 {{item.progress.mistakes}} 次</text>
+      </view>
+      <view class="meaning">{{item.meaning}}</view>
+      <view class="note">{{item.note}}</view>
+    </view>
+  </view>
+
+  <view wx:else class="card empty">
+    <view class="panel-title">现在还没有错题</view>
+    <view class="subtitle">从首页选择难度开始挑战，答错后会自动收进这里。</view>
+  </view>
+</view>
