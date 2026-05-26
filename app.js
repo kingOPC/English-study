@@ -1,6 +1,6 @@
 const store = require("./utils/store");
 
-const CLOUD_ENV_ID = "YOUR_CLOUD_ENV_ID";
+const CLOUD_ENV_ID = "cloud1-d6gqkkzru5ded9220";
 
 App({
   onLaunch() {
