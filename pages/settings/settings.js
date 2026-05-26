@@ -24,19 +24,26 @@ Page({
     if (this.data.syncing) return;
     this.setData({ syncing: true });
     cloud.ensureLogin()
-      .then(() => cloud.syncProgress())
-      .then(() => {
+      .catch((error) => {
+        throw new Error(`登录失败：${formatError(error)}`);
+      })
+      .then(() => cloud.syncProgress()
+        .catch((error) => {
+          throw new Error(`同步失败：${formatError(error)}`);
+        }))
+      .then((result) => {
         this.refreshLoginState();
         wx.showToast({
-          title: "已同步",
+          title: `已同步${result.synced || 0}条`,
           icon: "success"
         });
       })
       .catch((error) => {
         console.error("sync failed", error);
-        wx.showToast({
-          title: "同步失败，请检查云开发",
-          icon: "none"
+        wx.showModal({
+          title: "同步失败",
+          content: error.message || String(error),
+          showCancel: false
         });
       })
       .finally(() => {
@@ -76,3 +83,10 @@ Page({
     });
   }
 });
+
+function formatError(error) {
+  if (!error) return "未知错误";
+  if (error.errMsg) return error.errMsg;
+  if (error.message) return error.message;
+  return JSON.stringify(error);
+}
