@@ -50,8 +50,19 @@ function syncProgress() {
   if (!isLoggedIn()) {
     return Promise.resolve({ skipped: true });
   }
+  const progress = store.getProgress();
+  const changedProgress = Object.keys(progress).reduce((result, wordId) => {
+    const item = progress[wordId];
+    const hasLearningData = item
+      && (item.status !== "new" || item.correct > 0 || item.mistakes > 0 || item.lastReviewedAt);
+    if (hasLearningData) {
+      result[wordId] = item;
+    }
+    return result;
+  }, {});
+
   return callFunction("syncProgress", {
-    progress: store.getProgress()
+    progress: changedProgress
   }).then((res) => res.result || {});
 }
 

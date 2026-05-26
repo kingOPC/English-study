@@ -32,7 +32,8 @@ Page({
           icon: "success"
         });
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("sync failed", error);
         wx.showToast({
           title: "同步失败，请检查云开发",
           icon: "none"

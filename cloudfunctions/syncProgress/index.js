@@ -5,6 +5,7 @@ cloud.init({
 });
 
 const db = cloud.database();
+const BATCH_SIZE = 20;
 
 async function upsertProgress(openid, wordId, progress) {
   const docId = `${openid}_${wordId}`;
@@ -37,7 +38,10 @@ exports.main = async (event) => {
   const progress = event.progress || {};
   const entries = Object.keys(progress).map((wordId) => [wordId, progress[wordId]]);
 
-  await Promise.all(entries.map(([wordId, item]) => upsertProgress(OPENID, wordId, item)));
+  for (let index = 0; index < entries.length; index += BATCH_SIZE) {
+    const batch = entries.slice(index, index + BATCH_SIZE);
+    await Promise.all(batch.map(([wordId, item]) => upsertProgress(OPENID, wordId, item)));
+  }
 
   return {
     synced: entries.length
