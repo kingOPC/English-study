@@ -28,23 +28,9 @@ function ensureSeedData() {
   }
   const storedProgress = wx.getStorageSync(KEYS.progress);
   if (!storedProgress) {
-    const progress = {};
-    words.forEach((word) => {
-      progress[word.id] = createProgress(word.id);
-    });
-    wx.setStorageSync(KEYS.progress, progress);
+    wx.setStorageSync(KEYS.progress, {});
   } else {
-    const progress = { ...storedProgress };
-    let changed = false;
-    words.forEach((word) => {
-      if (!progress[word.id]) {
-        progress[word.id] = createProgress(word.id);
-        changed = true;
-      }
-    });
-    if (changed) {
-      wx.setStorageSync(KEYS.progress, progress);
-    }
+    wx.setStorageSync(KEYS.progress, storedProgress);
   }
   if (!wx.getStorageSync(KEYS.reviewLogs)) {
     wx.setStorageSync(KEYS.reviewLogs, []);
@@ -95,11 +81,7 @@ function saveProgress(progress) {
 }
 
 function resetLearningData() {
-  const progress = {};
-  words.forEach((word) => {
-    progress[word.id] = createProgress(word.id);
-  });
-  wx.setStorageSync(KEYS.progress, progress);
+  wx.setStorageSync(KEYS.progress, {});
   wx.setStorageSync(KEYS.reviewLogs, []);
 }
 
@@ -132,12 +114,22 @@ function getDailyTask() {
   const activeWords = getActiveWords();
 
   const dueWords = activeWords
-    .filter((word) => progress[word.id] && progress[word.id].nextReviewAt <= today && progress[word.id].status !== "new")
-    .sort((a, b) => progress[b.id].mistakes - progress[a.id].mistakes)
+    .filter((word) => {
+      const item = progress[word.id] || createProgress(word.id);
+      return item.nextReviewAt <= today && item.status !== "new";
+    })
+    .sort((a, b) => {
+      const progressA = progress[a.id] || createProgress(a.id);
+      const progressB = progress[b.id] || createProgress(b.id);
+      return progressB.mistakes - progressA.mistakes;
+    })
     .slice(0, settings.dailyReviewCount);
 
   const newWords = activeWords
-    .filter((word) => progress[word.id] && progress[word.id].status === "new")
+    .filter((word) => {
+      const item = progress[word.id] || createProgress(word.id);
+      return item.status === "new";
+    })
     .slice(0, settings.dailyNewCount);
 
   return {
@@ -150,7 +142,7 @@ function getDailyTask() {
 
 function answerWord(wordId, grade) {
   const progress = getProgress();
-  const current = progress[wordId];
+  const current = progress[wordId] || createProgress(wordId);
   const today = todayKey();
   const intervals = {
     again: 0,
@@ -184,11 +176,18 @@ function answerWord(wordId, grade) {
 function getMistakeWords() {
   const progress = getProgress();
   return words
-    .filter((word) => progress[word.id] && progress[word.id].mistakes > 0)
-    .sort((a, b) => progress[b.id].mistakes - progress[a.id].mistakes)
+    .filter((word) => {
+      const item = progress[word.id] || createProgress(word.id);
+      return item.mistakes > 0;
+    })
+    .sort((a, b) => {
+      const progressA = progress[a.id] || createProgress(a.id);
+      const progressB = progress[b.id] || createProgress(b.id);
+      return progressB.mistakes - progressA.mistakes;
+    })
     .map((word) => ({
       ...word,
-      progress: progress[word.id]
+      progress: progress[word.id] || createProgress(word.id)
     }));
 }
 
@@ -199,7 +198,7 @@ function getMistakeWordsByLevel(level) {
 function getLevelSummary(level) {
   const progress = getProgress();
   const levelWords = getWordsByLevel(level);
-  const values = levelWords.map((word) => progress[word.id]).filter(Boolean);
+  const values = levelWords.map((word) => progress[word.id] || createProgress(word.id));
   const learned = values.filter((item) => item.status !== "new").length;
   const mastered = values.filter((item) => item.status === "mastered").length;
   const mistakes = values.reduce((sum, item) => sum + item.mistakes, 0);
@@ -216,8 +215,7 @@ function getStats() {
   const progress = getProgress();
   const activeWords = getActiveWords();
   const values = activeWords
-    .map((word) => progress[word.id])
-    .filter(Boolean);
+    .map((word) => progress[word.id] || createProgress(word.id));
   const learned = values.filter((item) => item.status !== "new").length;
   const mastered = values.filter((item) => item.status === "mastered").length;
   const mistakes = values.reduce((sum, item) => sum + item.mistakes, 0);

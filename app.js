@@ -1,5 +1,3 @@
-const store = require("./utils/store");
-
 const CLOUD_ENV_ID = "cloud1-d6gqkkzru5ded9220";
 
 App({
@@ -13,6 +11,11 @@ App({
       }
       wx.cloud.init(cloudConfig);
     }
-    store.ensureSeedData();
+    try {
+      const store = require("./utils/store");
+      store.ensureSeedData();
+    } catch (error) {
+      console.error("seed data failed", error);
+    }
   }
 });
