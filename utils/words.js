@@ -1,3 +1,5 @@
+const { highSchoolBatch2Words, cetBatch2Words } = require("./word-expansions");
+
 const words = [
   {
     id: "el_animal",
@@ -679,7 +681,14 @@ const extraCetWords = extraCetRows.map((row) => ({
   note: row[7]
 }));
 
-const allWords = [...words, ...extraElementaryWords, ...extraHighSchoolWords, ...extraCetWords];
+const allWords = [
+  ...words,
+  ...extraElementaryWords,
+  ...extraHighSchoolWords,
+  ...extraCetWords,
+  ...highSchoolBatch2Words,
+  ...cetBatch2Words
+];
 
 const books = [
   {
