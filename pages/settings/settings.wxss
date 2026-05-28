@@ -6,6 +6,13 @@
   margin-top: 26rpx;
 }
 
+.library-text {
+  margin-top: 10rpx;
+  color: #176b5b;
+  font-size: 24rpx;
+  font-weight: 650;
+}
+
 .panel-title {
   font-size: 31rpx;
   font-weight: 750;

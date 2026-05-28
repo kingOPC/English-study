@@ -1,4 +1,4 @@
-const { highSchoolBatch2Words, cetBatch2Words } = require("./word-expansions");
+const { highSchoolBatch2Words, cetBatch2Words } = require("./word-expansions.js");
 
 const words = [
   {

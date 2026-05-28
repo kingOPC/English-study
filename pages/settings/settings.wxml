@@ -7,6 +7,7 @@
       <view>
         <view class="panel-title">英语词汇复习助手</view>
         <view class="subtitle">{{loginText}}</view>
+        <view class="library-text">{{libraryText}}</view>
       </view>
       <text class="pill">v0.2</text>
     </view>

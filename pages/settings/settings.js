@@ -5,11 +5,13 @@ Page({
   data: {
     loggedIn: false,
     loginText: "游客模式 · 本地保存学习进度",
-    syncing: false
+    syncing: false,
+    libraryText: ""
   },
 
   onShow() {
     this.refreshLoginState();
+    this.refreshLibraryText();
   },
 
   refreshLoginState() {
@@ -17,6 +19,15 @@ Page({
     this.setData({
       loggedIn: cloud.isLoggedIn(),
       loginText: session && session.openid ? "已登录 · 学习进度可同步到云端" : "游客模式 · 本地保存学习进度"
+    });
+  },
+
+  refreshLibraryText() {
+    const elementary = store.getWordsByLevel("elementary").length;
+    const highSchool = store.getWordsByLevel("high_school").length;
+    const cet = store.getWordsByLevel("cet").length;
+    this.setData({
+      libraryText: `词库：小学${elementary} · 高中${highSchool} · 四六级${cet}`
     });
   },
 
