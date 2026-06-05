@@ -10,7 +10,7 @@ Page({
   onShow() {
     const levels = store.books.map((book) => ({
       ...book,
-      badge: book.id === "elementary" ? "小" : book.id === "high_school" ? "高" : "C",
+      badge: book.id === "elementary" ? "五" : book.id === "high_school" ? "高" : "C",
       tone: book.id === "elementary" ? "elementary" : book.id === "high_school" ? "high" : "cet",
       summary: store.getLevelSummary(book.id)
     }));
