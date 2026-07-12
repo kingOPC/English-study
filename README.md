@@ -45,6 +45,8 @@ node scripts/csv-to-words.js data/word-template.csv utils/words.generated.js
 
 检查生成结果无误后，再把内容合并进 `utils/words.js`。
 
+词库数据来源和许可说明见 `docs/vocabulary-sources.md`。
+
 ## 下一步
 
 - 扩充完整五年级、高中、四六级词库。
