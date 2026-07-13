@@ -9,7 +9,7 @@
         <view class="subtitle">{{loginText}}</view>
         <view class="library-text">{{libraryText}}</view>
       </view>
-      <text class="pill">v0.2</text>
+      <text class="pill">词库 {{vocabularyTotal}}</text>
     </view>
     <button class="button sync-button" bindtap="loginAndSync" loading="{{syncing}}">
       {{loggedIn ? "同步学习进度" : "登录并保存进度"}}

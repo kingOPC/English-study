@@ -3,7 +3,9 @@ const store = require("../../utils/store");
 Page({
   data: {
     books: [],
-    settings: {}
+    settings: {},
+    totalWords: 0,
+    activeCount: 0
   },
 
   onShow() {
@@ -12,14 +14,22 @@ Page({
 
   refresh() {
     const settings = store.getSettings();
-    const books = store.books.map((book) => ({
-      ...book,
-      active: settings.activeBooks.includes(book.id),
-      summary: store.getLevelSummary(book.id)
-    }));
+    const books = store.books.map((book) => {
+      const summary = store.getLevelSummary(book.id);
+      return {
+        ...book,
+        active: settings.activeBooks.includes(book.id),
+        tone: book.id === "elementary" ? "elementary" : book.id === "high_school" ? "high" : "cet",
+        label: book.id === "elementary" ? "基础" : book.id === "high_school" ? "进阶" : "拓展",
+        summary,
+        learnedPercent: summary.total ? Math.round((summary.learned / summary.total) * 100) : 0
+      };
+    });
     this.setData({
       books,
-      settings
+      settings,
+      totalWords: store.words.length,
+      activeCount: settings.activeBooks.length
     });
   },
 

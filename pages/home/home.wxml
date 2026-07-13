@@ -1,8 +1,11 @@
 <view class="page home-page">
   <view class="hero-card">
-    <view class="eyebrow">每日词汇挑战</view>
+    <view class="hero-head">
+      <view class="eyebrow">每日词汇挑战</view>
+      <view class="version-mark">词库 {{vocabularyTotal}}</view>
+    </view>
     <view class="hero-title">用小测把单词记牢</view>
-    <view class="hero-copy">选择难度，完成 10 道四选一。答错自动进入错题本，后面反复复测。</view>
+    <view class="hero-copy">每轮 10 题，及时反馈。答错自动收进错题本，越练越稳。</view>
     <view class="hero-stats">
       <view>
         <text class="hero-number">{{stats.mastered}}</text>
@@ -23,7 +26,7 @@
     <view class="section-head">
       <view>
         <view class="section-title">选择难度</view>
-        <view class="section-subtitle">从轻到难，按孩子当前状态选。</view>
+        <view class="section-subtitle">三个阶段，共 {{vocabularyTotal}} 个核心词</view>
       </view>
     </view>
 
@@ -33,19 +36,25 @@
         <view class="level-name">{{item.name}}</view>
         <view class="level-desc">{{item.description}}</view>
         <view class="level-meta">
-          <text>{{item.summary.total}} 词</text>
+          <text class="word-count">{{item.summary.total}} 词</text>
           <text>已学 {{item.summary.learned}}</text>
           <text>错题 {{item.summary.mistakes}}</text>
         </view>
+        <view class="level-progress-row">
+          <view class="level-progress-track">
+            <view class="level-progress-fill" style="width: {{item.learnedPercent}}%;"></view>
+          </view>
+          <text>{{item.learnedPercent}}%</text>
+        </view>
       </view>
-      <view class="level-action">开始</view>
+      <view class="level-action">›</view>
     </view>
   </view>
 
-  <view class="section card revenge-card">
+  <view class="section revenge-card">
     <view>
       <view class="panel-title">错题复仇</view>
-      <view class="subtitle">优先攻克反复答错的词，答对后逐步降低出现频率。</view>
+      <view class="subtitle">集中解决易错词，答对后自动降低出现频率。</view>
     </view>
     <button class="button revenge-button" bindtap="startMistakeQuiz" disabled="{{mistakeCount === 0}}">
       {{mistakeCount === 0 ? "暂无错题" : "复测错题"}}

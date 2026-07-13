@@ -6,7 +6,8 @@ Page({
     loggedIn: false,
     loginText: "游客模式 · 本地保存学习进度",
     syncing: false,
-    libraryText: ""
+    libraryText: "",
+    vocabularyTotal: 0
   },
 
   onShow() {
@@ -27,7 +28,8 @@ Page({
     const highSchool = store.getWordsByLevel("high_school").length;
     const cet = store.getWordsByLevel("cet").length;
     this.setData({
-      libraryText: `词库：五年级${elementary} · 高中${highSchool} · 四六级${cet}`
+      libraryText: `词库 v0.3：小学${elementary} · 高中${highSchool} · 四六级${cet}`,
+      vocabularyTotal: elementary + highSchool + cet
     });
   },
 

@@ -25,42 +25,63 @@
   font-size: 24rpx;
 }
 
-.score-pill {
-  min-width: 104rpx;
-  height: 58rpx;
-  border-radius: 999rpx;
-  background: #20242a;
+.score-panel {
+  width: 130rpx;
+  min-height: 94rpx;
+  flex: 0 0 130rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11rpx;
+  background: #173f3a;
   color: #ffffff;
-  font-size: 24rpx;
-  font-weight: 750;
-  line-height: 58rpx;
   text-align: center;
 }
 
+.score-panel text:first-child {
+  font-size: 34rpx;
+  font-weight: 850;
+}
+
+.score-panel text:last-child {
+  margin-top: 3rpx;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 19rpx;
+}
+
 .progress-track {
-  height: 14rpx;
+  height: 10rpx;
   overflow: hidden;
   margin-top: 24rpx;
   border-radius: 999rpx;
-  background: #e8e1d4;
+  background: #e3e8e9;
 }
 
 .progress-bar {
   height: 100%;
   border-radius: 999rpx;
-  background: #176b5b;
+  background: #f0b94b;
 }
 
 .question-card {
-  min-height: 360rpx;
+  min-height: 330rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 26rpx;
   padding: 34rpx;
-  border-radius: 20rpx;
+  border: 1rpx solid #e4e8eb;
+  border-radius: 14rpx;
   background: #ffffff;
-  box-shadow: 0 18rpx 46rpx rgba(32, 36, 42, 0.07);
+  box-shadow: 0 14rpx 36rpx rgba(31, 42, 49, 0.06);
+}
+
+.question-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
 }
 
 .question-label {
@@ -69,10 +90,16 @@
   font-weight: 650;
 }
 
+.question-number {
+  color: #b0b7bd;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
 .word {
   margin-top: 28rpx;
   color: #20242a;
-  font-size: 78rpx;
+  font-size: 72rpx;
   font-weight: 900;
   line-height: 1.05;
   word-break: break-word;
@@ -94,8 +121,8 @@
 .tag-row text {
   min-height: 42rpx;
   padding: 0 16rpx;
-  border-radius: 999rpx;
-  background: #f1eee6;
+  border-radius: 5rpx;
+  background: #f0f3f3;
   color: #4d555f;
   font-size: 22rpx;
   line-height: 42rpx;
@@ -115,12 +142,12 @@
   gap: 22rpx;
   overflow: hidden;
   padding: 20rpx 24rpx;
-  border: 1rpx solid rgba(32, 36, 42, 0.08);
-  border-radius: 18rpx;
-  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
+  border: 1rpx solid #e1e6e8;
+  border-radius: 12rpx;
+  background: #ffffff;
   color: #20242a;
   text-align: left;
-  box-shadow: 0 14rpx 34rpx rgba(32, 36, 42, 0.06);
+  box-shadow: 0 8rpx 22rpx rgba(31, 42, 49, 0.045);
 }
 
 .option::before {
@@ -129,9 +156,9 @@
   left: 0;
   top: 18rpx;
   bottom: 18rpx;
-  width: 6rpx;
+  width: 5rpx;
   border-radius: 0 999rpx 999rpx 0;
-  background: #d8d1c3;
+  background: #cbd2d6;
 }
 
 .option-key {
@@ -139,8 +166,8 @@
   height: 56rpx;
   flex: 0 0 56rpx;
   border: 1rpx solid #e3ddd0;
-  border-radius: 16rpx;
-  background: #f5f1e9;
+  border-radius: 10rpx;
+  background: #f2f4f5;
   color: #4d555f;
   font-size: 24rpx;
   font-weight: 850;
@@ -170,8 +197,7 @@
   width: 48rpx;
   height: 48rpx;
   flex: 0 0 48rpx;
-  border-radius: 50%;
-  color: #ffffff;
+  color: #a1a9af;
   font-size: 28rpx;
   font-weight: 900;
   line-height: 48rpx;
@@ -180,7 +206,7 @@
 
 .option.correct {
   border-color: rgba(23, 107, 91, 0.35);
-  background: linear-gradient(180deg, #f1fbf7 0%, #e4f3ee 100%);
+  background: #edf8f4;
   box-shadow: 0 16rpx 38rpx rgba(23, 107, 91, 0.14);
 }
 
@@ -204,7 +230,7 @@
 
 .option.wrong {
   border-color: rgba(182, 66, 60, 0.34);
-  background: linear-gradient(180deg, #fff5f4 0%, #fae4e2 100%);
+  background: #fff1f0;
   box-shadow: 0 16rpx 38rpx rgba(182, 66, 60, 0.12);
 }
 
@@ -229,7 +255,8 @@
 .feedback {
   margin-top: 24rpx;
   padding: 26rpx;
-  border-radius: 18rpx;
+  border-left: 7rpx solid #176b5b;
+  border-radius: 10rpx;
 }
 
 .feedback.ok {
@@ -237,6 +264,7 @@
 }
 
 .feedback.no {
+  border-left-color: #b6423c;
   background: #fae9e8;
 }
 
@@ -258,7 +286,30 @@
 }
 
 .done {
-  margin-top: 120rpx;
+  margin-top: 100rpx;
+  padding: 52rpx 34rpx 34rpx;
+  border: 1rpx solid #e4e8eb;
+  border-radius: 14rpx;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 14rpx 36rpx rgba(31, 42, 49, 0.06);
+}
+
+.done-mark {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 0 auto 34rpx;
+  border: 14rpx solid #e4f1ed;
+  border-radius: 50%;
+  color: #176b5b;
+  font-size: 60rpx;
+  font-weight: 900;
+  line-height: 152rpx;
+}
+
+.done-mark text {
+  color: #7b858c;
+  font-size: 26rpx;
 }
 
 .done .button {

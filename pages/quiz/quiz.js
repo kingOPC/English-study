@@ -25,7 +25,11 @@ function buildQuestions(options) {
   const sourceWords = getSourceWords(options);
   const allWords = store.words;
   return shuffle(sourceWords).slice(0, QUIZ_SIZE).map((word) => {
-    const distractors = shuffle(allWords.filter((item) => item.id !== word.id)).slice(0, 3);
+    const distractors = shuffle(allWords.filter((item) => (
+      item.id !== word.id
+      && item.text.toLowerCase() !== word.text.toLowerCase()
+      && item.meaning !== word.meaning
+    ))).slice(0, 3);
     const optionsWithKeys = shuffle([word, ...distractors]).map((item, index) => ({
       ...item,
       key: optionKeys[index]

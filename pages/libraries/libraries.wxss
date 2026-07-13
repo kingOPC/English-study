@@ -1,5 +1,65 @@
+.library-page {
+  padding-bottom: 44rpx;
+}
+
+.library-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28rpx;
+}
+
+.library-total {
+  width: 138rpx;
+  min-height: 112rpx;
+  flex: 0 0 138rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12rpx;
+  background: #173f3a;
+  color: #ffffff;
+}
+
+.library-total text:first-child {
+  font-size: 34rpx;
+  font-weight: 850;
+}
+
+.library-total text:last-child {
+  margin-top: 4rpx;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 20rpx;
+}
+
+.active-summary {
+  margin-top: 28rpx;
+  padding: 18rpx 22rpx;
+  border-left: 6rpx solid #f0b94b;
+  border-radius: 6rpx;
+  background: #fff9eb;
+  color: #62532f;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
 .book {
   margin-top: 16rpx;
+  padding: 28rpx;
+  border: 1rpx solid #e4e8eb;
+  border-top: 7rpx solid #2f8f6f;
+  border-radius: 12rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 28rpx rgba(31, 42, 49, 0.05);
+}
+
+.book.high {
+  border-top-color: #3f6fa9;
+}
+
+.book.cet {
+  border-top-color: #7755a6;
 }
 
 .book-copy {
@@ -8,19 +68,104 @@
 
 .book-name {
   font-size: 32rpx;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-.book-stats {
-  margin-top: 12rpx;
-  color: #176b5b;
-  font-size: 24rpx;
-  font-weight: 650;
+.book-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.book-label {
+  padding: 4rpx 10rpx;
+  border-radius: 5rpx;
+  background: #edf6f2;
+  color: #2f765f;
+  font-size: 20rpx;
+  font-weight: 750;
+}
+
+.book.high .book-label {
+  background: #edf3fa;
+  color: #3f6fa9;
+}
+
+.book.cet .book-label {
+  background: #f3eff8;
+  color: #7755a6;
+}
+
+.book-data {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 26rpx;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #edf0f2;
+  border-bottom: 1rpx solid #edf0f2;
+}
+
+.book-data view {
+  border-right: 1rpx solid #edf0f2;
+  text-align: center;
+}
+
+.book-data view:last-child {
+  border-right: 0;
+}
+
+.book-data text {
+  display: block;
+}
+
+.book-data text:first-child {
+  color: #20242a;
+  font-size: 27rpx;
+  font-weight: 800;
+}
+
+.book-data text:last-child {
+  margin-top: 5rpx;
+  color: #858d95;
+  font-size: 20rpx;
+}
+
+.book-progress {
+  height: 8rpx;
+  overflow: hidden;
+  margin-top: 22rpx;
+  border-radius: 4rpx;
+  background: #edf0f2;
+}
+
+.book-progress-fill {
+  height: 100%;
+  border-radius: 4rpx;
+  background: #2f8f6f;
+}
+
+.book.high .book-progress-fill {
+  background: #3f6fa9;
+}
+
+.book.cet .book-progress-fill {
+  background: #7755a6;
+}
+
+.book-progress-copy {
+  margin-top: 10rpx;
+  color: #858d95;
+  font-size: 20rpx;
+  text-align: right;
 }
 
 .settings {
   display: grid;
   gap: 20rpx;
+  padding: 28rpx;
+  border: 1rpx solid #e4e8eb;
+  border-radius: 12rpx;
+  background: #ffffff;
 }
 
 .panel-title {
