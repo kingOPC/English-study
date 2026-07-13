@@ -28,7 +28,7 @@ Page({
     const highSchool = store.getWordsByLevel("high_school").length;
     const cet = store.getWordsByLevel("cet").length;
     this.setData({
-      libraryText: `词库 v0.3：小学${elementary} · 高中${highSchool} · 四六级${cet}`,
+      libraryText: `词库 v0.4：小学${elementary} · 高中${highSchool} · 四六级${cet}`,
       vocabularyTotal: elementary + highSchool + cet
     });
   },

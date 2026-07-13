@@ -21,15 +21,32 @@ function getSourceWords(options) {
   return store.getActiveWords();
 }
 
+function getDistractors(word, allWords, startIndex) {
+  const distractors = [];
+  const usedTexts = new Set([word.text.toLowerCase()]);
+  const usedMeanings = new Set([word.meaning]);
+
+  for (let offset = 0; offset < allWords.length; offset += 1) {
+    const item = allWords[(startIndex + offset) % allWords.length];
+    const text = item.text.toLowerCase();
+    if (usedTexts.has(text) || usedMeanings.has(item.meaning)) continue;
+    distractors.push(item);
+    usedTexts.add(text);
+    usedMeanings.add(item.meaning);
+    if (distractors.length === 3) break;
+  }
+
+  return distractors;
+}
+
 function buildQuestions(options) {
   const sourceWords = getSourceWords(options);
   const allWords = store.words;
-  return shuffle(sourceWords).slice(0, QUIZ_SIZE).map((word) => {
-    const distractors = shuffle(allWords.filter((item) => (
-      item.id !== word.id
-      && item.text.toLowerCase() !== word.text.toLowerCase()
-      && item.meaning !== word.meaning
-    ))).slice(0, 3);
+  const questionWords = shuffle(sourceWords).slice(0, QUIZ_SIZE);
+  const distractorPool = shuffle(allWords);
+  return questionWords.map((word, index) => {
+    const startIndex = Math.floor((index * distractorPool.length) / questionWords.length);
+    const distractors = getDistractors(word, distractorPool, startIndex);
     const optionsWithKeys = shuffle([word, ...distractors]).map((item, index) => ({
       ...item,
       key: optionKeys[index]
