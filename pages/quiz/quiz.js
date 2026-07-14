@@ -133,14 +133,19 @@ Page({
   },
 
   saveResult() {
-    cloud.saveQuizLog({
+    const saveLog = cloud.saveQuizLog({
       mode: this.data.quizMode,
       level: this.data.quizLevel,
       score: this.data.score,
       total: this.data.total,
       wrongWordIds: this.data.wrongWordIds
+    }).catch((error) => {
+      console.error("save quiz log failed; result remains local", error);
     });
-    cloud.syncProgress();
+    const sync = cloud.syncProgress().catch((error) => {
+      console.error("sync progress failed; progress remains local", error);
+    });
+    return Promise.all([saveLog, sync]);
   },
 
   backHome() {

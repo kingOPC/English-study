@@ -55,7 +55,7 @@ Page({
         console.error("sync failed", error);
         wx.showModal({
           title: "同步失败",
-          content: error.message || String(error),
+          content: cloud.getFriendlyError(error),
           showCancel: false
         });
       })
@@ -99,7 +99,5 @@ Page({
 
 function formatError(error) {
   if (!error) return "未知错误";
-  if (error.errMsg) return error.errMsg;
-  if (error.message) return error.message;
-  return JSON.stringify(error);
+  return cloud.getFriendlyError(error);
 }
