@@ -58,6 +58,7 @@
           </view>
           <view class="usage-sentence">{{item.sentence}}</view>
           <view class="usage-translation">{{item.translation}}</view>
+          <view wx:if="{{item.source}}" class="usage-source">{{item.source}}</view>
         </view>
       </view>
       <button class="button" bindtap="nextQuestion">{{isLast ? "查看结果" : "下一题"}}</button>

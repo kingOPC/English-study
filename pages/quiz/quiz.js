@@ -1,5 +1,6 @@
 const store = require("../../utils/store");
 const cloud = require("../../utils/cloud");
+const examplesByWord = require("../../utils/examples");
 
 const optionKeys = ["A", "B", "C", "D"];
 const QUIZ_SIZE = 10;
@@ -104,6 +105,83 @@ function getCoreMeaning(word) {
     .replace(/的$/, "");
 }
 
+function hashWord(text) {
+  return text.split("").reduce((result, character) => result + character.charCodeAt(0), 0);
+}
+
+function pickTemplate(templates, word, variant) {
+  const index = (hashWord(word.text) + variant) % templates.length;
+  return templates[index](word.text, getCoreMeaning(word));
+}
+
+function buildFallbackUsage(word, variant) {
+  const part = (word.partOfSpeech || "").toLowerCase();
+  const nounTemplates = [
+    (text, meaning) => [`The class discussed ${text} in detail.`, `全班详细讨论了${meaning}。`],
+    (text, meaning) => [`The article provides useful information about ${text}.`, `这篇文章提供了有关${meaning}的有用信息。`],
+    (text, meaning) => [`The teacher asked us to explain ${text} in our own words.`, `老师让我们用自己的话解释${meaning}。`],
+    (text, meaning) => [`We found a clear example of ${text} in the text.`, `我们在文中找到了一个关于${meaning}的清晰例子。`],
+    (text, meaning) => [`Understanding ${text} can help us read more carefully.`, `理解${meaning}能帮助我们更认真地阅读。`],
+    (text, meaning) => [`Our lesson included a short discussion of ${text}.`, `我们的课程包含了一段关于${meaning}的简短讨论。`]
+  ];
+  const transitiveTemplates = [
+    (text, meaning) => [`They tried to ${text} it before class.`, `他们试着在课前${meaning}它。`],
+    (text, meaning) => [`Please ${text} the key point carefully.`, `请认真${meaning}这个要点。`],
+    (text, meaning) => [`We need to ${text} this problem together.`, `我们需要一起${meaning}这个问题。`],
+    (text, meaning) => [`The teacher showed us how to ${text} the material.`, `老师向我们展示了如何${meaning}这些材料。`],
+    (text, meaning) => [`She decided to ${text} the plan after discussion.`, `讨论后，她决定${meaning}这个计划。`],
+    (text, meaning) => [`It is important to ${text} each detail.`, `${meaning}每个细节都很重要。`]
+  ];
+  const intransitiveTemplates = [
+    (text, meaning) => [`They began to ${text} after the bell rang.`, `铃响后，他们开始${meaning}。`],
+    (text, meaning) => [`We waited for them to ${text}.`, `我们等着他们${meaning}。`],
+    (text, meaning) => [`The students may ${text} at different times.`, `学生们可能会在不同时间${meaning}。`],
+    (text, meaning) => [`He was the first to ${text}.`, `他是第一个${meaning}的人。`],
+    (text, meaning) => [`They continued to ${text} despite the difficulty.`, `尽管有困难，他们仍继续${meaning}。`],
+    (text, meaning) => [`It took them a long time to ${text}.`, `他们花了很长时间才${meaning}。`]
+  ];
+  const verbTemplates = [
+    (text, meaning) => [`We learned how to ${text} in class.`, `我们在课堂上学习了如何${meaning}。`],
+    (text, meaning) => [`The teacher asked us to ${text} carefully.`, `老师让我们认真${meaning}。`],
+    (text, meaning) => [`It is useful to know when to ${text}.`, `知道什么时候该${meaning}很有用。`],
+    (text, meaning) => [`Students practiced how to ${text} correctly.`, `学生们练习了如何正确地${meaning}。`],
+    (text, meaning) => [`They decided to ${text} after discussion.`, `讨论后，他们决定${meaning}。`],
+    (text, meaning) => [`The lesson showed us why people ${text}.`, `这节课让我们明白人们为什么会${meaning}。`]
+  ];
+  const adjectiveTemplates = [
+    (text, meaning) => [`The teacher described the result as ${text}.`, `老师把这个结果描述为${meaning}。`],
+    (text, meaning) => [`The situation became more ${text} over time.`, `随着时间推移，情况变得更加${meaning}。`],
+    (text, meaning) => [`It seemed ${text} at first.`, `起初它似乎很${meaning}。`],
+    (text, meaning) => [`The article gives a ${text} example.`, `这篇文章给出了一个${meaning}的例子。`],
+    (text, meaning) => [`We found the idea both useful and ${text}.`, `我们发现这个想法既有用又${meaning}。`],
+    (text, meaning) => [`Her explanation was clear and ${text}.`, `她的解释清楚而且${meaning}。`]
+  ];
+  const adverbTemplates = [
+    (text, meaning) => [`She explained the idea ${text}.`, `她${meaning}地解释了这个想法。`],
+    (text, meaning) => [`He completed the task ${text}.`, `他${meaning}地完成了任务。`],
+    (text, meaning) => [`The students listened ${text}.`, `学生们${meaning}地听着。`],
+    (text, meaning) => [`Please read the sentence ${text}.`, `请${meaning}地朗读这个句子。`],
+    (text, meaning) => [`They responded ${text} to the question.`, `他们${meaning}地回答了这个问题。`],
+    (text, meaning) => [`The teacher spoke ${text} during the lesson.`, `老师在课堂上${meaning}地讲话。`]
+  ];
+  const otherTemplates = [
+    (text) => [`The teacher used "${text}" in a new sentence.`, `老师在一个新句子中使用了“${text}”。`],
+    (text) => [`We compared two sentences containing "${text}".`, `我们比较了两个含有“${text}”的句子。`],
+    (text) => [`I marked the word "${text}" in my notebook.`, `我在笔记本中标记了“${text}”这个词。`],
+    (text) => [`The class practiced using "${text}" in context.`, `全班练习了在语境中使用“${text}”。`],
+    (text) => [`Can you find "${text}" in the passage?`, `你能在文章中找到“${text}”吗？`],
+    (text) => [`We reviewed the word "${text}" after class.`, `我们课后复习了“${text}”这个词。`]
+  ];
+
+  if (part.includes("vt.")) return pickTemplate(transitiveTemplates, word, variant);
+  if (part.includes("vi.")) return pickTemplate(intransitiveTemplates, word, variant);
+  if (part.includes("v.")) return pickTemplate(verbTemplates, word, variant);
+  if (part.startsWith("adj.") || part === "a.") return pickTemplate(adjectiveTemplates, word, variant);
+  if (part.includes("adv.")) return pickTemplate(adverbTemplates, word, variant);
+  if (part.includes("n.")) return pickTemplate(nounTemplates, word, variant);
+  return pickTemplate(otherTemplates, word, variant);
+}
+
 function buildUsage(word, role, label, variant = 0) {
   const override = usageOverrides[word.text.toLowerCase()];
   if (override) {
@@ -119,37 +197,19 @@ function buildUsage(word, role, label, variant = 0) {
     };
   }
 
-  const part = (word.partOfSpeech || "").toLowerCase();
-  const meaning = getCoreMeaning(word);
-  let sentence;
-  let translation;
-
-  if (part.includes("vt.")) {
-    sentence = variant === 1 ? `Please ${word.text} it before class.` : `They tried to ${word.text} it.`;
-    translation = variant === 1 ? `请在课前${meaning}它。` : `他们试着${meaning}它。`;
-  } else if (part.includes("vi.")) {
-    sentence = variant === 1 ? `They will ${word.text} soon.` : `They began to ${word.text}.`;
-    translation = variant === 1 ? `他们很快会${meaning}。` : `他们开始${meaning}。`;
-  } else if (part.includes("v.")) {
-    sentence = variant === 1 ? `Try to ${word.text} every day.` : `We learned how to ${word.text}.`;
-    translation = variant === 1 ? `试着每天${meaning}。` : `我们学习了如何${meaning}。`;
-  } else if (part.startsWith("adj.") || part === "a.") {
-    sentence = variant === 1 ? `It seems ${word.text} to me.` : `The teacher described it as ${word.text}.`;
-    translation = variant === 1 ? `在我看来，它似乎很${meaning}。` : `老师把它描述为${meaning}。`;
-  } else if (part.includes("adv.")) {
-    sentence = variant === 1 ? `He completed the task ${word.text}.` : `She explained it ${word.text}.`;
-    translation = variant === 1 ? `他${meaning}地完成了任务。` : `她${meaning}地解释了这件事。`;
-  } else if (part.includes("n.")) {
-    sentence = variant === 1 ? `This lesson helped us understand ${word.text}.` : `We learned about ${word.text} today.`;
-    translation = variant === 1 ? `这节课帮助我们理解了${meaning}。` : `我们今天学习了与“${meaning}”有关的内容。`;
-  } else {
-    sentence = variant === 1
-      ? `I wrote the word "${word.text}" in my notebook.`
-      : `We learned how to use "${word.text}" today.`;
-    translation = variant === 1
-      ? `我把“${word.text}”这个词写在了笔记本上。`
-      : `我们今天学习了如何使用“${word.text}”这个词。`;
+  const corpusExample = (examplesByWord[word.text.toLowerCase()] || [])[variant];
+  if (corpusExample) {
+    return {
+      id: `${role}_${word.id}_${variant}`,
+      role,
+      label,
+      word: word.text,
+      phonetic: word.phonetic,
+      ...corpusExample
+    };
   }
+
+  const fallback = buildFallbackUsage(word, variant);
 
   return {
     id: `${role}_${word.id}_${variant}`,
@@ -157,8 +217,9 @@ function buildUsage(word, role, label, variant = 0) {
     label,
     word: word.text,
     phonetic: word.phonetic,
-    sentence,
-    translation
+    sentence: fallback[0],
+    translation: fallback[1],
+    source: "词义辅助句"
   };
 }
 
@@ -205,15 +266,20 @@ Page({
     const wrongWordIds = isCorrect
       ? this.data.wrongWordIds
       : Array.from(new Set([...this.data.wrongWordIds, current.word.id]));
-    const usageExamples = isCorrect
-      ? [
+    let usageExamples;
+    if (isCorrect) {
+      usageExamples = [
         buildUsage(current.word, "correct", "例句 1", 0),
         buildUsage(current.word, "correct", "例句 2", 1)
-      ]
-      : [
-        buildUsage(selectedWord, "selected", "你的选择", 0),
-        buildUsage(current.word, "correct", "本题单词", 0)
       ];
+    } else {
+      const selectedUsage = buildUsage(selectedWord, "selected", "你的选择", 0);
+      let correctUsage = buildUsage(current.word, "correct", "本题单词", 0);
+      if (correctUsage.sentence === selectedUsage.sentence) {
+        correctUsage = buildUsage(current.word, "correct", "本题单词", 1);
+      }
+      usageExamples = [selectedUsage, correctUsage];
+    }
     this.setData({
       answered: true,
       selectedId,

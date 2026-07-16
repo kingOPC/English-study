@@ -5,6 +5,13 @@
 - 项目地址：https://github.com/skywind3000/ECDICT
 - 许可协议：MIT License
 
+答题反馈中的部分英中双语例句来自 Tatoeba 语料库，由 ManyThings 提供句对下载：
+
+- 句对下载：https://www.manythings.org/anki/
+- 原始项目：https://tatoeba.org/
+- 许可协议：Creative Commons Attribution 2.0 France
+- 每条例句的 Tatoeba 句子编号和贡献者署名会随例句显示。
+
 ## ECDICT License Notice
 
 MIT License Copyright (c) 2025 Linwei Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
