@@ -117,12 +117,12 @@ function pickTemplate(templates, word, variant) {
 function buildFallbackUsage(word, variant) {
   const part = (word.partOfSpeech || "").toLowerCase();
   const nounTemplates = [
-    (text, meaning) => [`The class discussed ${text} in detail.`, `全班详细讨论了${meaning}。`],
-    (text, meaning) => [`The article provides useful information about ${text}.`, `这篇文章提供了有关${meaning}的有用信息。`],
-    (text, meaning) => [`The teacher asked us to explain ${text} in our own words.`, `老师让我们用自己的话解释${meaning}。`],
-    (text, meaning) => [`We found a clear example of ${text} in the text.`, `我们在文中找到了一个关于${meaning}的清晰例子。`],
-    (text, meaning) => [`Understanding ${text} can help us read more carefully.`, `理解${meaning}能帮助我们更认真地阅读。`],
-    (text, meaning) => [`Our lesson included a short discussion of ${text}.`, `我们的课程包含了一段关于${meaning}的简短讨论。`]
+    (text, meaning) => [`The class discussed the meaning of "${text}" in detail.`, `全班详细讨论了“${text}”所表示的“${meaning}”。`],
+    (text, meaning) => [`The article provides a useful context for the word "${text}".`, `这篇文章为“${text}”（${meaning}）提供了清晰语境。`],
+    (text, meaning) => [`The teacher asked us to explain "${text}" in our own words.`, `老师让我们用自己的话解释“${text}”（${meaning}）。`],
+    (text, meaning) => [`We found a clear example of "${text}" in the text.`, `我们在文中找到了“${text}”（${meaning}）的清晰例子。`],
+    (text, meaning) => [`Understanding the word "${text}" can improve our reading.`, `理解“${text}”（${meaning}）能提高我们的阅读能力。`],
+    (text, meaning) => [`Our lesson included a short discussion of the word "${text}".`, `课堂上我们简短讨论了“${text}”（${meaning}）。`]
   ];
   const transitiveTemplates = [
     (text, meaning) => [`They tried to ${text} it before class.`, `他们试着在课前${meaning}它。`],
@@ -260,26 +260,15 @@ Page({
     if (this.data.answered) return;
     const selectedId = event.currentTarget.dataset.id;
     const current = this.data.current;
-    const selectedWord = current.options.find((item) => item.id === selectedId);
     const isCorrect = selectedId === current.word.id;
     store.answerWord(current.word.id, isCorrect ? "good" : "again");
     const wrongWordIds = isCorrect
       ? this.data.wrongWordIds
       : Array.from(new Set([...this.data.wrongWordIds, current.word.id]));
-    let usageExamples;
-    if (isCorrect) {
-      usageExamples = [
-        buildUsage(current.word, "correct", "例句 1", 0),
-        buildUsage(current.word, "correct", "例句 2", 1)
-      ];
-    } else {
-      const selectedUsage = buildUsage(selectedWord, "selected", "你的选择", 0);
-      let correctUsage = buildUsage(current.word, "correct", "本题单词", 0);
-      if (correctUsage.sentence === selectedUsage.sentence) {
-        correctUsage = buildUsage(current.word, "correct", "本题单词", 1);
-      }
-      usageExamples = [selectedUsage, correctUsage];
-    }
+    const usageExamples = [
+      buildUsage(current.word, "correct", "例句 1", 0),
+      buildUsage(current.word, "correct", "例句 2", 1)
+    ];
     this.setData({
       answered: true,
       selectedId,
