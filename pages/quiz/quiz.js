@@ -4,27 +4,37 @@ const cloud = require("../../utils/cloud");
 const optionKeys = ["A", "B", "C", "D"];
 const QUIZ_SIZE = 10;
 const usageOverrides = {
-  a: ["I saw a bird in the tree.", "我看见树上有一只鸟。"],
-  the: ["The book on the desk is mine.", "桌子上的那本书是我的。"],
-  be: ["You can be a better learner.", "你可以成为一名更优秀的学习者。"],
-  can: ["I can finish the task today.", "我今天能完成这项任务。"],
-  could: ["Could you open the window?", "你可以打开窗户吗？"],
-  may: ["It may rain this afternoon.", "今天下午可能会下雨。"],
-  must: ["We must follow the rules.", "我们必须遵守规则。"],
-  should: ["You should check your answer.", "你应该检查一下答案。"],
-  will: ["I will call you after school.", "放学后我会给你打电话。"],
-  would: ["I would like a glass of water.", "我想要一杯水。"],
-  and: ["Tom and Lily are classmates.", "汤姆和莉莉是同学。"],
-  but: ["The question is difficult but useful.", "这个问题很难，但很有用。"],
-  if: ["Call me if you need help.", "如果你需要帮助，就给我打电话。"],
-  or: ["Would you like tea or coffee?", "你想喝茶还是咖啡？"],
-  because: ["I stayed home because it was raining.", "因为下雨了，所以我待在家里。"],
-  with: ["She went to the library with her friend.", "她和朋友一起去了图书馆。"],
-  from: ["This letter is from my teacher.", "这封信来自我的老师。"],
-  for: ["This gift is for you.", "这份礼物是给你的。"],
-  in: ["The keys are in my bag.", "钥匙在我的包里。"],
-  on: ["The picture is on the wall.", "这幅画在墙上。"],
-  to: ["We walked to school together.", "我们一起步行去学校。"]
+  a: ["I saw a bird in the tree.", "我看见树上有一只鸟。", "She bought a new notebook.", "她买了一本新笔记本。"],
+  the: ["The book on the desk is mine.", "桌子上的那本书是我的。", "Please close the door.", "请把门关上。"],
+  be: ["You can be a better learner.", "你可以成为一名更优秀的学习者。", "Be careful on the road.", "在路上要小心。"],
+  can: ["I can finish the task today.", "我今天能完成这项任务。", "Can you help me with this question?", "你能帮我解答这道题吗？"],
+  could: ["Could you open the window?", "你可以打开窗户吗？", "We could meet after class.", "我们可以课后见面。"],
+  may: ["It may rain this afternoon.", "今天下午可能会下雨。", "You may use my dictionary.", "你可以使用我的词典。"],
+  must: ["We must follow the rules.", "我们必须遵守规则。", "You must finish your homework first.", "你必须先完成作业。"],
+  should: ["You should check your answer.", "你应该检查一下答案。", "We should help each other.", "我们应该互相帮助。"],
+  will: ["I will call you after school.", "放学后我会给你打电话。", "She will arrive tomorrow.", "她明天会到达。"],
+  would: ["I would like a glass of water.", "我想要一杯水。", "Would you join our study group?", "你愿意加入我们的学习小组吗？"],
+  and: ["Tom and Lily are classmates.", "汤姆和莉莉是同学。", "Read the question and choose an answer.", "阅读题目并选择一个答案。"],
+  but: ["The question is difficult but useful.", "这个问题很难，但很有用。", "He is tired, but he keeps studying.", "他很累，但仍继续学习。"],
+  if: ["Call me if you need help.", "如果你需要帮助，就给我打电话。", "If it is sunny, we will go outside.", "如果天气晴朗，我们就出去。"],
+  or: ["Would you like tea or coffee?", "你想喝茶还是咖啡？", "You can walk or take the bus.", "你可以步行或乘公共汽车。"],
+  because: ["I stayed home because it was raining.", "因为下雨了，所以我待在家里。", "She smiled because she passed the test.", "她因为通过了考试而微笑。"],
+  with: ["She went to the library with her friend.", "她和朋友一起去了图书馆。", "Write the answer with a pencil.", "用铅笔写答案。"],
+  from: ["This letter is from my teacher.", "这封信来自我的老师。", "We study from Monday to Friday.", "我们从星期一学习到星期五。"],
+  for: ["This gift is for you.", "这份礼物是给你的。", "We waited for the school bus.", "我们等候校车。"],
+  in: ["The keys are in my bag.", "钥匙在我的包里。", "We have English class in the morning.", "我们上午有英语课。"],
+  into: ["She walked into the classroom.", "她走进了教室。", "Pour the water into the glass.", "把水倒进玻璃杯里。"],
+  on: ["The picture is on the wall.", "这幅画在墙上。", "The meeting starts on Monday.", "会议星期一开始。"],
+  to: ["We walked to school together.", "我们一起步行去学校。", "Please listen to the teacher.", "请听老师讲课。"],
+  at: ["Meet me at the school gate.", "在学校门口和我见面。", "She is good at English.", "她擅长英语。"],
+  by: ["The novel was written by him.", "这部小说是他写的。", "I sat by the window.", "我坐在窗边。"],
+  about: ["We talked about the new plan.", "我们讨论了新计划。", "About twenty students joined the club.", "大约二十名学生加入了社团。"],
+  as: ["She works as a teacher.", "她是一名教师。", "Do as the teacher says.", "按照老师说的做。"],
+  than: ["My brother is taller than me.", "我哥哥比我高。", "Reading is more useful than waiting.", "阅读比等待更有用。"],
+  when: ["Call me when you arrive.", "你到达时给我打电话。", "When does the class begin?", "这节课什么时候开始？"],
+  which: ["Which book do you prefer?", "你更喜欢哪一本书？", "I do not know which answer is right.", "我不知道哪个答案是对的。"],
+  who: ["Who is your English teacher?", "谁是你的英语老师？", "Do you know who called me?", "你知道是谁给我打电话的吗？"],
+  what: ["What does this word mean?", "这个单词是什么意思？", "Tell me what you learned today.", "告诉我你今天学到了什么。"]
 };
 
 function shuffle(items) {
@@ -94,17 +104,18 @@ function getCoreMeaning(word) {
     .replace(/的$/, "");
 }
 
-function buildUsage(word, role, label) {
+function buildUsage(word, role, label, variant = 0) {
   const override = usageOverrides[word.text.toLowerCase()];
   if (override) {
+    const offset = variant === 1 ? 2 : 0;
     return {
-      id: `${role}_${word.id}`,
+      id: `${role}_${word.id}_${variant}`,
       role,
       label,
       word: word.text,
       phonetic: word.phonetic,
-      sentence: override[0],
-      translation: override[1]
+      sentence: override[offset],
+      translation: override[offset + 1]
     };
   }
 
@@ -114,30 +125,34 @@ function buildUsage(word, role, label) {
   let translation;
 
   if (part.includes("vt.")) {
-    sentence = `They tried to ${word.text} it.`;
-    translation = `他们试着${meaning}它。`;
+    sentence = variant === 1 ? `Please ${word.text} it before class.` : `They tried to ${word.text} it.`;
+    translation = variant === 1 ? `请在课前${meaning}它。` : `他们试着${meaning}它。`;
   } else if (part.includes("vi.")) {
-    sentence = `They began to ${word.text}.`;
-    translation = `他们开始${meaning}。`;
+    sentence = variant === 1 ? `They will ${word.text} soon.` : `They began to ${word.text}.`;
+    translation = variant === 1 ? `他们很快会${meaning}。` : `他们开始${meaning}。`;
   } else if (part.includes("v.")) {
-    sentence = `We learned how to ${word.text}.`;
-    translation = `我们学习了如何${meaning}。`;
+    sentence = variant === 1 ? `Try to ${word.text} every day.` : `We learned how to ${word.text}.`;
+    translation = variant === 1 ? `试着每天${meaning}。` : `我们学习了如何${meaning}。`;
   } else if (part.startsWith("adj.") || part === "a.") {
-    sentence = `The teacher described it as ${word.text}.`;
-    translation = `老师把它描述为${meaning}。`;
+    sentence = variant === 1 ? `It seems ${word.text} to me.` : `The teacher described it as ${word.text}.`;
+    translation = variant === 1 ? `在我看来，它似乎很${meaning}。` : `老师把它描述为${meaning}。`;
   } else if (part.includes("adv.")) {
-    sentence = `She explained it ${word.text}.`;
-    translation = `她${meaning}地解释了这件事。`;
+    sentence = variant === 1 ? `He completed the task ${word.text}.` : `She explained it ${word.text}.`;
+    translation = variant === 1 ? `他${meaning}地完成了任务。` : `她${meaning}地解释了这件事。`;
   } else if (part.includes("n.")) {
-    sentence = `We learned about ${word.text} today.`;
-    translation = `我们今天学习了与“${meaning}”有关的内容。`;
+    sentence = variant === 1 ? `This lesson helped us understand ${word.text}.` : `We learned about ${word.text} today.`;
+    translation = variant === 1 ? `这节课帮助我们理解了${meaning}。` : `我们今天学习了与“${meaning}”有关的内容。`;
   } else {
-    sentence = `We learned how to use "${word.text}" today.`;
-    translation = `我们今天学习了如何使用“${word.text}”这个词。`;
+    sentence = variant === 1
+      ? `I wrote the word "${word.text}" in my notebook.`
+      : `We learned how to use "${word.text}" today.`;
+    translation = variant === 1
+      ? `我把“${word.text}”这个词写在了笔记本上。`
+      : `我们今天学习了如何使用“${word.text}”这个词。`;
   }
 
   return {
-    id: `${role}_${word.id}`,
+    id: `${role}_${word.id}_${variant}`,
     role,
     label,
     word: word.text,
@@ -191,10 +206,13 @@ Page({
       ? this.data.wrongWordIds
       : Array.from(new Set([...this.data.wrongWordIds, current.word.id]));
     const usageExamples = isCorrect
-      ? [buildUsage(current.word, "correct", "你的选择")]
+      ? [
+        buildUsage(current.word, "correct", "例句 1", 0),
+        buildUsage(current.word, "correct", "例句 2", 1)
+      ]
       : [
-        buildUsage(selectedWord, "selected", "你的选择"),
-        buildUsage(current.word, "correct", "本题单词")
+        buildUsage(selectedWord, "selected", "你的选择", 0),
+        buildUsage(current.word, "correct", "本题单词", 0)
       ];
     this.setData({
       answered: true,
