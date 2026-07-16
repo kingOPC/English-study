@@ -39,16 +39,27 @@
         <view class="option-key">{{item.key}}</view>
         <view class="option-main">
           <view class="option-text">{{item.meaning}}</view>
-          <view class="option-hint">{{answered && item.id === current.word.id ? "正确答案" : answered && item.id === selectedId ? "你的选择" : "点击选择"}}</view>
+          <view wx:if="{{!answered}}" class="option-hint">点击选择</view>
         </view>
-        <view class="option-state">{{answered && item.id === current.word.id ? "✓" : answered && item.id === selectedId ? "×" : "›"}}</view>
+        <view class="option-state">{{answered ? "" : "›"}}</view>
       </view>
     </view>
 
     <view wx:if="{{answered}}" class="feedback {{isCorrect ? 'ok' : 'no'}}">
-      <view class="feedback-title">{{isCorrect ? "答对了，继续保持" : "答错了，已进入错题本"}}</view>
-      <view class="feedback-copy">正确答案：{{current.word.meaning}}</view>
-      <view class="feedback-note">{{current.word.note}}</view>
+      <view class="feedback-status"></view>
+      <view class="usage-list">
+        <view wx:for="{{usageExamples}}" wx:key="id" class="usage-card {{item.role}}">
+          <view class="usage-head">
+            <view>
+              <text class="usage-word">{{item.word}}</text>
+              <text class="usage-phonetic">{{item.phonetic}}</text>
+            </view>
+            <text class="usage-label">{{item.label}}</text>
+          </view>
+          <view class="usage-sentence">{{item.sentence}}</view>
+          <view class="usage-translation">{{item.translation}}</view>
+        </view>
+      </view>
       <button class="button" bindtap="nextQuestion">{{isLast ? "查看结果" : "下一题"}}</button>
     </view>
   </view>
