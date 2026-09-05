@@ -11,11 +11,5 @@ App({
       }
       wx.cloud.init(cloudConfig);
     }
-    try {
-      const store = require("./utils/store");
-      store.ensureSeedData();
-    } catch (error) {
-      console.error("seed data failed", error);
-    }
   }
 });

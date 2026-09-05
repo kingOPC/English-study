@@ -1,7 +1,32 @@
 {
   "description": "Personal free vocabulary review mini program",
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      {
+        "type": "folder",
+        "value": ".agents"
+      },
+      {
+        "type": "folder",
+        "value": ".learnings"
+      },
+      {
+        "type": "folder",
+        "value": ".claude"
+      },
+      {
+        "type": "folder",
+        "value": "automations"
+      },
+      {
+        "type": "folder",
+        "value": "draft_notes"
+      },
+      {
+        "type": "file",
+        "value": "skills-lock.json"
+      }
+    ],
     "include": []
   },
   "setting": {

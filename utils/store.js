@@ -26,11 +26,8 @@ function ensureSeedData() {
   } else {
     migrateSettings();
   }
-  const storedProgress = wx.getStorageSync(KEYS.progress);
-  if (!storedProgress) {
+  if (!wx.getStorageSync(KEYS.progress)) {
     wx.setStorageSync(KEYS.progress, {});
-  } else {
-    wx.setStorageSync(KEYS.progress, storedProgress);
   }
   if (!wx.getStorageSync(KEYS.reviewLogs)) {
     wx.setStorageSync(KEYS.reviewLogs, []);
@@ -44,11 +41,14 @@ function migrateSettings() {
     .map((id) => (id === "cet4" || id === "cet6" ? "cet" : id))
     .filter((id, index, list) => validBookIds.includes(id) && list.indexOf(id) === index);
 
-  wx.setStorageSync(KEYS.settings, {
+  const migratedSettings = {
     ...defaultSettings,
     ...settings,
     activeBooks: activeBooks.length ? activeBooks : defaultSettings.activeBooks
-  });
+  };
+  if (JSON.stringify(settings) !== JSON.stringify(migratedSettings)) {
+    wx.setStorageSync(KEYS.settings, migratedSettings);
+  }
 }
 
 function createProgress(wordId) {
