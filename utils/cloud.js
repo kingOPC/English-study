@@ -3,6 +3,29 @@ const store = require("./store");
 const SESSION_KEY = "cloudSession";
 const MAX_RETRIES = 2;
 const SYNC_BATCH_SIZE = 100;
+const CLOUD_ENV_ID = "cloud1-d6gqkkzru5ded9220";
+let cloudReady = false;
+
+function ensureCloudReady() {
+  if (!hasCloud() || cloudReady) {
+    return Promise.resolve();
+  }
+  if (!CLOUD_ENV_ID || CLOUD_ENV_ID === "YOUR_CLOUD_ENV_ID") {
+    return Promise.resolve();
+  }
+
+  try {
+    wx.cloud.init({
+      env: CLOUD_ENV_ID,
+      traceUser: true
+    });
+    cloudReady = true;
+  } catch (error) {
+    console.warn("cloud init failed", error);
+  }
+
+  return Promise.resolve();
+}
 
 function hasCloud() {
   return Boolean(wx.cloud && wx.cloud.callFunction);
@@ -32,10 +55,10 @@ function callFunction(name, data, retries = MAX_RETRIES) {
   if (!hasCloud()) {
     return Promise.reject(new Error("当前微信版本不支持云开发"));
   }
-  return wx.cloud.callFunction({
+  return ensureCloudReady().then(() => wx.cloud.callFunction({
     name,
     data
-  }).catch((error) => {
+  })).catch((error) => {
     if (!isNetworkError(error) || retries <= 0) throw error;
     return wait((MAX_RETRIES - retries + 1) * 500)
       .then(() => callFunction(name, data, retries - 1));
